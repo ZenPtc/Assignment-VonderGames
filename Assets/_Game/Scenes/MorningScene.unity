@@ -362,6 +362,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground 01
       objectReference: {fileID: 0}
+    - target: {fileID: 1530298204051010, guid: 08256cd7963eea940bcd350650fdd99f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4104952050266960, guid: 08256cd7963eea940bcd350650fdd99f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -463,5 +467,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2116354346164194283, guid: db30b3580f52bcf4a8d381aaa6f096f3, type: 3}
+      propertyPath: _feetPosition
+      value: 
+      objectReference: {fileID: 4023472555620706773}
+    - target: {fileID: 2116354346164194283, guid: db30b3580f52bcf4a8d381aaa6f096f3, type: 3}
+      propertyPath: _groundCheckCircle
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116354346164194283, guid: db30b3580f52bcf4a8d381aaa6f096f3, type: 3}
+      propertyPath: _groundLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931915483686354229, guid: db30b3580f52bcf4a8d381aaa6f096f3, type: 3}
+      propertyPath: jumpForce
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db30b3580f52bcf4a8d381aaa6f096f3, type: 3}
+--- !u!4 &4023472555620706773 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4275101205491199767, guid: db30b3580f52bcf4a8d381aaa6f096f3, type: 3}
+  m_PrefabInstance: {fileID: 4023472555620706772}
+  m_PrefabAsset: {fileID: 0}

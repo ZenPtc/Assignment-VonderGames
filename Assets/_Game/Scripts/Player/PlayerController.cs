@@ -5,9 +5,13 @@ namespace TK
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private LayerMask _groundLayer;
+        [SerializeField] private Transform _feetPosition;
+        [SerializeField] private float _groundCheckCircle;
+        private bool _isGrounded;
+
         private PlayerInputActions _playerInputActions;
         private InputAction _move;
-
         private Player _player;
 
         private void Awake()
@@ -56,7 +60,12 @@ namespace TK
             _player.Move(_move.ReadValue<float>());
         }
 
-        private void DoJump(InputAction.CallbackContext ctx) { _player.Jump(); }
+        private void Update()
+        {
+            _isGrounded = Physics2D.OverlapCircle(_feetPosition.position, _groundCheckCircle, _groundLayer);
+        }
+
+        private void DoJump(InputAction.CallbackContext ctx) { if(_isGrounded) _player.Jump(); }
         private void DoDash(InputAction.CallbackContext ctx) { _player.Dash(); }
         private void DoAttack(InputAction.CallbackContext ctx) { _player.Attack(); }
         private void DoInteract(InputAction.CallbackContext ctx) { _player.Interact(); }
