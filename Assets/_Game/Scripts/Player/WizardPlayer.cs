@@ -4,6 +4,7 @@ namespace TK
 {
     public class WizardPlayer : Player
     {
+        [Header("Wizard")]
         [SerializeField] private Transform _bulletSpawner;
         [SerializeField] private GameObject _bulletPrefab;
 

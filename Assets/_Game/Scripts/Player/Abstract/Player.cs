@@ -3,10 +3,16 @@ using UnityEngine;
 
 namespace TK
 {
-    public abstract class Player : MonoBehaviour
+    public abstract class Player : MonoBehaviour, IDamageable
     {
         protected Rigidbody2D rb;
 
+        [Header("Properties")]
+        [SerializeField] protected float maxHealth = 100f;
+        protected PlayerHealthSystem playerHealthSystem;
+        protected Vector3 spawnPosition;
+
+        [Header("Movement")]
         [SerializeField] protected float moveSpeed = 5f;
         [SerializeField] protected float jumpForce = 8f;
         [SerializeField] protected float dashForce = 15f;
@@ -19,6 +25,8 @@ namespace TK
         {
             DontDestroyOnLoad(gameObject);
             rb = GetComponent<Rigidbody2D>();
+            playerHealthSystem = new PlayerHealthSystem(maxHealth);
+            spawnPosition = transform.position;
 
             CanDash = true;
             IsDashing = false;
@@ -45,6 +53,19 @@ namespace TK
             CanDash = true;
         }
 
+        protected virtual void Die()
+        {
+            Debug.Log("Player Die");
+            Respawn();
+        }
+
+        protected virtual void Respawn()
+        {
+            playerHealthSystem.ResetHealth();
+            transform.position = spawnPosition;
+            Debug.Log("Player Respawned");
+        }
+
         public virtual void Move(float moveValue)
         {
             rb.velocity = new Vector2(moveValue * moveSpeed, rb.velocity.y);
@@ -65,6 +86,12 @@ namespace TK
         public virtual void Interact(IInteractable interactObject)
         {
             interactObject.interact();
+        }
+
+        public virtual void TakeDamage(float dmgAmount)
+        {
+            playerHealthSystem.TakeDamage(dmgAmount);
+            if(playerHealthSystem.IsDead()) Die();
         }
     }
 }
