@@ -9,8 +9,7 @@ namespace TK
 
         [Header("Properties")]
         [SerializeField] protected float maxHealth = 100f;
-        protected PlayerHealthSystem playerHealthSystem;
-        protected Vector3 spawnPosition;
+        public PlayerLifeSystem PlayerHealthSystem { get; protected set; }
 
         [Header("Movement")]
         [SerializeField] protected float moveSpeed = 5f;
@@ -25,8 +24,7 @@ namespace TK
         {
             DontDestroyOnLoad(gameObject);
             rb = GetComponent<Rigidbody2D>();
-            playerHealthSystem = new PlayerHealthSystem(maxHealth);
-            spawnPosition = transform.position;
+            PlayerHealthSystem = new PlayerLifeSystem(maxHealth, transform.position, this);
 
             CanDash = true;
             IsDashing = false;
@@ -53,19 +51,6 @@ namespace TK
             CanDash = true;
         }
 
-        protected virtual void Die()
-        {
-            Debug.Log("Player Die");
-            Respawn();
-        }
-
-        protected virtual void Respawn()
-        {
-            playerHealthSystem.ResetHealth();
-            transform.position = spawnPosition;
-            Debug.Log("Player Respawned");
-        }
-
         public virtual void Move(float moveValue)
         {
             rb.velocity = new Vector2(moveValue * moveSpeed, rb.velocity.y);
@@ -90,8 +75,7 @@ namespace TK
 
         public virtual void TakeDamage(float dmgAmount)
         {
-            playerHealthSystem.TakeDamage(dmgAmount);
-            if(playerHealthSystem.IsDead()) Die();
+            PlayerHealthSystem.TakeDamage(dmgAmount);
         }
     }
 }
