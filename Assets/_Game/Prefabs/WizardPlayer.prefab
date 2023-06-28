@@ -83,5 +83,10 @@ MonoBehaviour:
   dashForce: 15
   dashTime: 0.3
   dashCooldown: 0.1
-  bulletSpawner: {fileID: 0}
-  bulletPrefab: {fileID: 7956500069708161717, guid: 23b06aa3193f5184d8b19c5b0cdad5a0, type: 3}
+  _bulletSpawner: {fileID: 5030699824018005776}
+  _bulletPrefab: {fileID: 7956500069708161717, guid: 23b06aa3193f5184d8b19c5b0cdad5a0, type: 3}
+--- !u!4 &5030699824018005776 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7160677485247713042, guid: 77c7a91e90032b04d8faaa986caab96c, type: 3}
+  m_PrefabInstance: {fileID: 2778568060349796354}
+  m_PrefabAsset: {fileID: 0}

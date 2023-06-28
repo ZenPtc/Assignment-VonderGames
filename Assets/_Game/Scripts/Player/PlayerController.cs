@@ -13,6 +13,7 @@ namespace TK
         private InputAction _move;
         private Player _player;
 
+        private IInteractable _interactObject = null;
         private bool _isFacingRight = true;
         private bool _isGrounded;
 
@@ -57,6 +58,22 @@ namespace TK
             _playerInputActions.Player.Interact.Disable();
         }
 
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.TryGetComponent(out IInteractable interactable))
+            {
+                _interactObject = interactable;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if(collision.TryGetComponent(out IInteractable interactable))
+            {
+                if(_interactObject == interactable) _interactObject = null;
+            }
+        }
+
         private void FixedUpdate()
         {
             if(!_player.IsDashing)
@@ -86,6 +103,6 @@ namespace TK
         private void DoJump(InputAction.CallbackContext ctx) { if(_isGrounded) _player.Jump(); }
         private void DoDash(InputAction.CallbackContext ctx) { if(_player.CanDash) _player.Dash(); }
         private void DoAttack(InputAction.CallbackContext ctx) { _player.Attack(); }
-        private void DoInteract(InputAction.CallbackContext ctx) { _player.Interact(); }
+        private void DoInteract(InputAction.CallbackContext ctx) { if(_interactObject != null) _player.Interact(_interactObject); }
     }
 }

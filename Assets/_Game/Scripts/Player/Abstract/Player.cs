@@ -61,9 +61,9 @@ namespace TK
 
         public virtual void Attack() { }
 
-        public virtual void Interact()
+        public virtual void Interact(IInteractable interactObject)
         {
-            Debug.Log("Interact!!");
+            interactObject.interact();
         }
     }
 }
