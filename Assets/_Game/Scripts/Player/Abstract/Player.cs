@@ -59,10 +59,7 @@ namespace TK
             StartCoroutine(Dashing());
         }
 
-        public virtual void Attack()
-        {
-            Debug.Log("Attack!!");
-        }
+        public virtual void Attack() { }
 
         public virtual void Interact()
         {
