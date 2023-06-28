@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WizardPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 5923084853097373194, guid: 77c7a91e90032b04d8faaa986caab96c, type: 3}
+      propertyPath: _shootParticle
+      value: 
+      objectReference: {fileID: 5573911981547114328, guid: 6f2baf5200ad98947b4ad9d955d8b7de, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77c7a91e90032b04d8faaa986caab96c, type: 3}
 --- !u!1 &839805398187822697 stripped
@@ -78,6 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eea25e218616ac48a3e73ef649ef9a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
   moveSpeed: 5
   jumpForce: 20
   dashForce: 15
