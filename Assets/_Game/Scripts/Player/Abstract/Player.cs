@@ -17,6 +17,7 @@ namespace TK
 
         protected void Awake()
         {
+            DontDestroyOnLoad(gameObject);
             rb = GetComponent<Rigidbody2D>();
 
             CanDash = true;
