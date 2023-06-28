@@ -9,7 +9,7 @@ namespace TK
 
         [Header("Properties")]
         [SerializeField] protected float maxHealth = 100f;
-        public PlayerLifeSystem PlayerHealthSystem { get; protected set; }
+        public PlayerLifeSystem PlayerLifeSystem { get; protected set; }
 
         [Header("Movement")]
         [SerializeField] protected float moveSpeed = 5f;
@@ -24,7 +24,7 @@ namespace TK
         {
             DontDestroyOnLoad(gameObject);
             rb = GetComponent<Rigidbody2D>();
-            PlayerHealthSystem = new PlayerLifeSystem(maxHealth, transform.position, this);
+            PlayerLifeSystem = new PlayerLifeSystem(maxHealth, transform.position, this);
 
             CanDash = true;
             IsDashing = false;
@@ -75,7 +75,7 @@ namespace TK
 
         public virtual void TakeDamage(float dmgAmount)
         {
-            PlayerHealthSystem.TakeDamage(dmgAmount);
+            PlayerLifeSystem.TakeDamage(dmgAmount);
         }
     }
 }

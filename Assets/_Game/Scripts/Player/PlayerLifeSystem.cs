@@ -26,7 +26,12 @@ namespace TK
             if(_currentHealth <= 0) Die();
         }
 
-        public void ResetHealth()
+        public void SetSpawnPosition(Vector3 position)
+        {
+            _spawnPosition = position;
+        }
+
+        private void ResetHealth()
         {
             _currentHealth = _maxHealth;
         }
