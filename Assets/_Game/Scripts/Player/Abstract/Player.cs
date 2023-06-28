@@ -3,10 +3,15 @@ using UnityEngine;
 
 namespace TK
 {
-    public abstract class Player : MonoBehaviour
+    public abstract class Player : MonoBehaviour, IDamageable
     {
         protected Rigidbody2D rb;
 
+        [Header("Properties")]
+        [SerializeField] protected float maxHealth = 100f;
+        public PlayerLifeSystem PlayerLifeSystem { get; protected set; }
+
+        [Header("Movement")]
         [SerializeField] protected float moveSpeed = 5f;
         [SerializeField] protected float jumpForce = 8f;
         [SerializeField] protected float dashForce = 15f;
@@ -19,6 +24,7 @@ namespace TK
         {
             DontDestroyOnLoad(gameObject);
             rb = GetComponent<Rigidbody2D>();
+            PlayerLifeSystem = new PlayerLifeSystem(maxHealth, transform.position, this);
 
             CanDash = true;
             IsDashing = false;
@@ -65,6 +71,11 @@ namespace TK
         public virtual void Interact(IInteractable interactObject)
         {
             interactObject.interact();
+        }
+
+        public virtual void TakeDamage(float dmgAmount)
+        {
+            PlayerLifeSystem.TakeDamage(dmgAmount);
         }
     }
 }
