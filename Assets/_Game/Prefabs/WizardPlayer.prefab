@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1572266149679064708, guid: 77c7a91e90032b04d8faaa986caab96c, type: 3}
+      propertyPath: m_GravityScale
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3254099643626528361, guid: 77c7a91e90032b04d8faaa986caab96c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -74,3 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eea25e218616ac48a3e73ef649ef9a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 5
+  jumpForce: 20
+  dashForce: 15
+  dashTime: 0.3
+  dashCooldown: 0.1

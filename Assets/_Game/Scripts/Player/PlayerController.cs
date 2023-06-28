@@ -8,11 +8,13 @@ namespace TK
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private Transform _feetPosition;
         [SerializeField] private float _groundCheckCircle;
-        private bool _isGrounded;
 
         private PlayerInputActions _playerInputActions;
         private InputAction _move;
         private Player _player;
+
+        private bool _isFacingRight = true;
+        private bool _isGrounded;
 
         private void Awake()
         {
@@ -57,7 +59,12 @@ namespace TK
 
         private void FixedUpdate()
         {
-            _player.Move(_move.ReadValue<float>());
+            if(!_player.IsDashing)
+            {
+                float moveValue = _move.ReadValue<float>();
+                _player.Move(moveValue);
+                PlayerFacingControl(moveValue);
+            }
         }
 
         private void Update()
@@ -65,8 +72,19 @@ namespace TK
             _isGrounded = Physics2D.OverlapCircle(_feetPosition.position, _groundCheckCircle, _groundLayer);
         }
 
+        private void PlayerFacingControl(float moveValue)
+        {
+            if(_isFacingRight && moveValue < 0 || !_isFacingRight && moveValue > 0)
+            {
+                _isFacingRight = !_isFacingRight;
+                Vector3 localScale = transform.localScale;
+                localScale.x *= -1;
+                transform.localScale = localScale;
+            }
+        }
+
         private void DoJump(InputAction.CallbackContext ctx) { if(_isGrounded) _player.Jump(); }
-        private void DoDash(InputAction.CallbackContext ctx) { _player.Dash(); }
+        private void DoDash(InputAction.CallbackContext ctx) { if(_player.CanDash) _player.Dash(); }
         private void DoAttack(InputAction.CallbackContext ctx) { _player.Attack(); }
         private void DoInteract(InputAction.CallbackContext ctx) { _player.Interact(); }
     }
