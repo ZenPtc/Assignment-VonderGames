@@ -76,7 +76,7 @@ namespace TK
 
         private void FixedUpdate()
         {
-            if(!_player.IsDashing)
+            if(_player.State != Player.PlayerState.OnDash)
             {
                 float moveValue = _move.ReadValue<float>();
                 _player.Move(moveValue);
