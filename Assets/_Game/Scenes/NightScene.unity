@@ -5308,6 +5308,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 99362702411866275, guid: ea9742b93c940c7438e94be553893609, type: 3}
+      propertyPath: _dialogue.sentences.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 99362702411866275, guid: ea9742b93c940c7438e94be553893609, type: 3}
+      propertyPath: _dialogue.sentences.Array.data[0]
+      value: say A
+      objectReference: {fileID: 0}
+    - target: {fileID: 99362702411866275, guid: ea9742b93c940c7438e94be553893609, type: 3}
+      propertyPath: _dialogue.sentences.Array.data[1]
+      value: say B
+      objectReference: {fileID: 0}
+    - target: {fileID: 99362702411866275, guid: ea9742b93c940c7438e94be553893609, type: 3}
+      propertyPath: _dialogue.sentences.Array.data[2]
+      value: say C
+      objectReference: {fileID: 0}
     - target: {fileID: 99362702411866276, guid: ea9742b93c940c7438e94be553893609, type: 3}
       propertyPath: m_RootOrder
       value: 3
