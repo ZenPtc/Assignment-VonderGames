@@ -91,9 +91,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  moveSpeed: 5
+  moveSpeed: 8
   jumpForce: 20
-  dashForce: 15
+  dashForce: 2.5
   dashTime: 0.3
   dashCooldown: 0.1
   _bulletSpawner: {fileID: 5030699824018005776}

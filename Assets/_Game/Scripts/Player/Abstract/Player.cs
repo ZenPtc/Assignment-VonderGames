@@ -14,11 +14,11 @@ namespace TK
 
         [Header("Properties")]
         [SerializeField] protected float maxHealth = 100f;
-        
+
         [Header("Movement")]
-        [SerializeField] protected float moveSpeed = 5f;
-        [SerializeField] protected float jumpForce = 8f;
-        [SerializeField] protected float dashForce = 15f;
+        [SerializeField] protected float moveSpeed = 8f;
+        [SerializeField] protected float jumpForce = 20f;
+        [SerializeField] protected float dashForce = 2.5f;
         [SerializeField] protected float dashTime = 0.3f;
         [SerializeField] protected float dashCooldown = 0.1f;
 
@@ -72,7 +72,7 @@ namespace TK
             CanDash = false;
             isDashing = true;
             rb.gravityScale = 0f;
-            rb.velocity = direction * dashForce;
+            rb.velocity = direction * moveSpeed * dashForce;
             yield return new WaitForSeconds(dashTime);
             rb.gravityScale = originalGravity;
             State = PlayerState.None;
