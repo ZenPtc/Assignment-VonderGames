@@ -63,6 +63,14 @@ PrefabInstance:
       propertyPath: _shootParticle
       value: 
       objectReference: {fileID: 5573911981547114328, guid: 6f2baf5200ad98947b4ad9d955d8b7de, type: 3}
+    - target: {fileID: 5923084853097373194, guid: 77c7a91e90032b04d8faaa986caab96c, type: 3}
+      propertyPath: _attackParticle
+      value: 
+      objectReference: {fileID: 5573911981547114328, guid: 6f2baf5200ad98947b4ad9d955d8b7de, type: 3}
+    - target: {fileID: 5923084853097373194, guid: 77c7a91e90032b04d8faaa986caab96c, type: 3}
+      propertyPath: _attackTransform
+      value: 
+      objectReference: {fileID: 5030699824018005776}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77c7a91e90032b04d8faaa986caab96c, type: 3}
 --- !u!1 &839805398187822697 stripped
@@ -83,9 +91,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  moveSpeed: 5
+  moveSpeed: 8
   jumpForce: 20
-  dashForce: 15
+  dashForce: 2.5
   dashTime: 0.3
   dashCooldown: 0.1
   _bulletSpawner: {fileID: 5030699824018005776}
