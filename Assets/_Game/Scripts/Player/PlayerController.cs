@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,6 +17,12 @@ namespace TK
         private IInteractable _interactObject = null;
         private bool _isFacingRight = true;
         private bool _isGrounded;
+
+        public event Action<float> OnMove;
+        public event Action OnJump;
+        public event Action OnDash;
+        public event Action OnAttack;
+        public event Action<IInteractable> OnInteract;
 
         private void Awake()
         {
@@ -79,7 +86,7 @@ namespace TK
             if(_player.State != Player.PlayerState.OnDash)
             {
                 float moveValue = _move.ReadValue<float>();
-                _player.Move(moveValue);
+                OnMove?.Invoke(moveValue);
                 PlayerFacingControl(moveValue);
             }
         }
@@ -100,9 +107,9 @@ namespace TK
             }
         }
 
-        private void DoJump(InputAction.CallbackContext ctx) { if(_isGrounded) _player.Jump(); }
-        private void DoDash(InputAction.CallbackContext ctx) { if(_player.CanDash) _player.Dash(); }
-        private void DoAttack(InputAction.CallbackContext ctx) { _player.Attack(); }
-        private void DoInteract(InputAction.CallbackContext ctx) { if(_interactObject != null) _player.Interact(_interactObject); }
+        private void DoJump(InputAction.CallbackContext ctx) { if(_isGrounded) OnJump?.Invoke(); }
+        private void DoDash(InputAction.CallbackContext ctx) { if(_player.CanDash) OnDash?.Invoke(); }
+        private void DoAttack(InputAction.CallbackContext ctx) { OnAttack?.Invoke(); }
+        private void DoInteract(InputAction.CallbackContext ctx) { if(_interactObject != null) OnInteract?.Invoke(_interactObject); }
     }
 }

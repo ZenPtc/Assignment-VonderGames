@@ -26,6 +26,7 @@ namespace TK
         public PlayerState State { get; protected set; }
         public bool CanDash { get; protected set; }
 
+        protected PlayerController playerController;
         protected Rigidbody2D rb;
         protected float originalGravity;
         protected bool isDashing;
@@ -34,6 +35,7 @@ namespace TK
         {
             DontDestroyOnLoad(gameObject);
             rb = GetComponent<Rigidbody2D>();
+            playerController = GetComponent<PlayerController>();
             PlayerLifeSystem = new PlayerLifeSystem(maxHealth, transform.position, this);
 
             originalGravity = rb.gravityScale;
@@ -42,8 +44,23 @@ namespace TK
             CanDash = true;
         }
 
+        protected void OnEnable()
+        {
+            playerController.OnMove += Move;
+            playerController.OnJump += Jump;
+            playerController.OnDash += Dash;
+            playerController.OnAttack += Attack;
+            playerController.OnInteract += Interact;
+        }
+
         protected void OnDisable()
         {
+            playerController.OnMove -= Move;
+            playerController.OnJump -= Jump;
+            playerController.OnDash -= Dash;
+            playerController.OnAttack -= Attack;
+            playerController.OnInteract -= Interact;
+
             StopCoroutine(Dashing());
         }
 
