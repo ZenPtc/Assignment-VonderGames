@@ -17,6 +17,7 @@ namespace TK
         private IInteractable _interactObject = null;
         private bool _isFacingRight = true;
         private bool _isGrounded;
+        private bool _isOnDialogue;
 
         public event Action<float> OnMove;
         public event Action OnJump;
@@ -46,6 +47,8 @@ namespace TK
 
             _playerInputActions.Player.Interact.performed += DoInteract;
             _playerInputActions.Player.Interact.Enable();
+
+            DialogueManager.Instance.OnDialogue += OnDialogue;
         }
 
         private void OnDisable()
@@ -63,6 +66,8 @@ namespace TK
 
             _playerInputActions.Player.Interact.performed -= DoInteract;
             _playerInputActions.Player.Interact.Disable();
+
+            DialogueManager.Instance.OnDialogue -= OnDialogue;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -83,6 +88,7 @@ namespace TK
 
         private void FixedUpdate()
         {
+            if(_isOnDialogue) return;
             if(_player.State != Player.PlayerState.OnDash)
             {
                 float moveValue = _move.ReadValue<float>();
@@ -107,9 +113,30 @@ namespace TK
             }
         }
 
-        private void DoJump(InputAction.CallbackContext ctx) { if(_isGrounded) OnJump?.Invoke(); }
-        private void DoDash(InputAction.CallbackContext ctx) { if(_player.CanDash) OnDash?.Invoke(); }
-        private void DoAttack(InputAction.CallbackContext ctx) { OnAttack?.Invoke(); }
-        private void DoInteract(InputAction.CallbackContext ctx) { if(_interactObject != null) OnInteract?.Invoke(_interactObject); }
+        private void DoJump(InputAction.CallbackContext ctx)
+        {
+            if(_isOnDialogue) return;
+            if(_isGrounded) OnJump?.Invoke();
+        }
+
+        private void DoDash(InputAction.CallbackContext ctx)
+        {
+            if(_isOnDialogue) return;
+            if(_player.CanDash) OnDash?.Invoke();
+        }
+
+        private void DoAttack(InputAction.CallbackContext ctx)
+        {
+            if(_isOnDialogue) return;
+            OnAttack?.Invoke();
+        }
+
+        private void DoInteract(InputAction.CallbackContext ctx)
+        {
+            if(_isOnDialogue) return;
+            if(_interactObject != null) OnInteract?.Invoke(_interactObject);
+        }
+
+        private void OnDialogue(bool isOpen) { _isOnDialogue = isOpen; }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,12 +16,21 @@ namespace TK
         private PlayerInputActions _playerInputActions;
         private Queue<string> _sentenceQueue;
 
+        public event Action<bool> OnDialogue;
+
         public override void Awake()
         {
             base.Awake();
 
             _playerInputActions = new PlayerInputActions();
             _sentenceQueue = new Queue<string>();
+        }
+
+        public void SetDialogueBox(TMP_Text name, TMP_Text dialogue, Animator animator)
+        {
+            _name = name;
+            _dialogue = dialogue;
+            _animator = animator;
         }
 
         private void OnDisable()
@@ -30,11 +40,12 @@ namespace TK
 
         public void StartDialogue(Dialogue dialogue)
         {
+            _sentenceQueue.Clear();
+
+            OnDialogue.Invoke(true);
+            _animator.SetBool("IsOpen", true);
             _playerInputActions.Player.NextDialogue.performed += DisplayNextSentence;
             _playerInputActions.Player.NextDialogue.Enable();
-
-            _sentenceQueue.Clear();
-            _animator.SetBool("IsOpen", true);
 
             foreach(string sentence in dialogue.sentences)
             {
@@ -60,6 +71,7 @@ namespace TK
 
         private void EndDialogue()
         {
+            OnDialogue.Invoke(false);
             _animator.SetBool("IsOpen", false);
             _playerInputActions.Player.NextDialogue.performed -= DisplayNextSentence;
             _playerInputActions.Player.NextDialogue.Disable();
