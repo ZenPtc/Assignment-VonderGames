@@ -12,24 +12,28 @@ namespace TK
         [SerializeField] private Transform _attackTransform;
 
         private PlayerController _playerController;
+        private PlayerAnimation _playerAnimation;
 
         private void Awake()
         {
             _playerController = GetComponent<PlayerController>();
+            _playerAnimation = GetComponent<PlayerAnimation>();
         }
 
         private void OnEnable()
         {
             _playerController.OnJump += PlayJumpParticle;
             _playerController.OnDash += PlayDashParticle;
-            _playerController.OnAttack += PlayAttackParticle;
+
+            _playerAnimation.OnAttack += PlayAttackParticle;
         }
 
         private void OnDisable()
         {
             _playerController.OnJump -= PlayJumpParticle;
             _playerController.OnDash -= PlayDashParticle;
-            _playerController.OnAttack -= PlayAttackParticle;
+
+            _playerAnimation.OnAttack -= PlayAttackParticle;
         }
 
         private void PlayJumpParticle()

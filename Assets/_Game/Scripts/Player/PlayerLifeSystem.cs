@@ -10,11 +10,14 @@ namespace TK
         private float _maxHealth;
         private float _currentHealth;
 
+        public bool IsDead { get; private set; }
+
         public PlayerLifeSystem(float initialHealth, Vector3 spawnPosition, Player player)
         {
             _player = player;
             _spawnPosition = spawnPosition;
 
+            IsDead = false;
             _maxHealth = initialHealth;
             _currentHealth = _maxHealth;
         }
@@ -23,7 +26,11 @@ namespace TK
         {
             _currentHealth -= dmgAmount;
             Debug.Log($"Take {dmgAmount} damage, Remain health: {_currentHealth}");
-            if(_currentHealth <= 0) Die();
+            if(_currentHealth <= 0)
+            {
+                Debug.Log("Die");
+                IsDead = true;
+            }
         }
 
         public void SetSpawnPosition(Vector3 position)
@@ -31,22 +38,17 @@ namespace TK
             _spawnPosition = position;
         }
 
-        private void ResetHealth()
+        public void Respawn()
         {
-            _currentHealth = _maxHealth;
-        }
-
-        private void Die()
-        {
-            Debug.Log("Player Die");
-            Respawn();
-        }
-
-        private void Respawn()
-        {
+            IsDead = false;
             ResetHealth();
             _player.transform.position = _spawnPosition;
             Debug.Log("Player Respawned");
+        }
+
+        private void ResetHealth()
+        {
+            _currentHealth = _maxHealth;
         }
     }
 }

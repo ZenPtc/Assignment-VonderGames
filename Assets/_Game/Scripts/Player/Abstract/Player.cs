@@ -9,7 +9,8 @@ namespace TK
         {
             None,
             OnMove,
-            OnDash
+            OnDash,
+            OnDamaged
         }
 
         [Header("Properties")]
@@ -27,7 +28,9 @@ namespace TK
         public bool CanDash { get; protected set; }
 
         protected PlayerController playerController;
+        protected PlayerAnimation playerAnimation;
         protected Rigidbody2D rb;
+        protected PlayerState beforeState;
         protected float originalGravity;
         protected bool isDashing;
 
@@ -36,6 +39,7 @@ namespace TK
             DontDestroyOnLoad(gameObject);
             rb = GetComponent<Rigidbody2D>();
             playerController = GetComponent<PlayerController>();
+            playerAnimation = GetComponent<PlayerAnimation>();
             PlayerLifeSystem = new PlayerLifeSystem(maxHealth, transform.position, this);
 
             originalGravity = rb.gravityScale;
@@ -49,8 +53,10 @@ namespace TK
             playerController.OnMove += Move;
             playerController.OnJump += Jump;
             playerController.OnDash += Dash;
-            playerController.OnAttack += Attack;
             playerController.OnInteract += Interact;
+
+            playerAnimation.OnAttack += Attack;
+            playerAnimation.OnRespawn += PlayerLifeSystem.Respawn;
         }
 
         protected void OnDisable()
@@ -58,8 +64,10 @@ namespace TK
             playerController.OnMove -= Move;
             playerController.OnJump -= Jump;
             playerController.OnDash -= Dash;
-            playerController.OnAttack -= Attack;
             playerController.OnInteract -= Interact;
+
+            playerAnimation.OnAttack -= Attack;
+            playerAnimation.OnRespawn -= PlayerLifeSystem.Respawn;
 
             StopCoroutine(Dashing());
         }
@@ -75,7 +83,7 @@ namespace TK
             rb.velocity = direction * moveSpeed * dashForce;
             yield return new WaitForSeconds(dashTime);
             rb.gravityScale = originalGravity;
-            State = PlayerState.None;
+            State = beforeState;
             isDashing = false;
             yield return new WaitForSeconds(dashCooldown);
             CanDash = true;
@@ -85,7 +93,7 @@ namespace TK
         {
             StopCoroutine(Dashing());
             rb.gravityScale = originalGravity;
-            State = PlayerState.None;
+            State = beforeState;
             isDashing = false;
             CanDash = true;
         }
@@ -105,6 +113,7 @@ namespace TK
 
         public virtual void Dash()
         {
+            beforeState = State;
             State = PlayerState.OnDash;
             StartCoroutine(Dashing());
         }
@@ -118,6 +127,7 @@ namespace TK
 
         public virtual void TakeDamage(float dmgAmount)
         {
+            State = PlayerState.OnDamaged;
             PlayerLifeSystem.TakeDamage(dmgAmount);
         }
     }
