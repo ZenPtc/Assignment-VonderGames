@@ -16,9 +16,9 @@ namespace TK
 
         private IInteractable _interactObject = null;
         private bool _isFacingRight = true;
-        private bool _isGrounded;
         private bool _isOnDialogue;
 
+        public bool _isGrounded { get; private set; }
         public event Action<float> OnMove;
         public event Action OnJump;
         public event Action OnDash;
@@ -128,7 +128,7 @@ namespace TK
         private void DoAttack(InputAction.CallbackContext ctx)
         {
             if(_isOnDialogue) return;
-            OnAttack?.Invoke();
+            if(_player.State == Player.PlayerState.OnMove || _player.State == Player.PlayerState.None) OnAttack?.Invoke();
         }
 
         private void DoInteract(InputAction.CallbackContext ctx)

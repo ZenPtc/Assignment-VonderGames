@@ -71,6 +71,10 @@ PrefabInstance:
       propertyPath: _attackTransform
       value: 
       objectReference: {fileID: 5030699824018005776}
+    - target: {fileID: 7160677485247713042, guid: 77c7a91e90032b04d8faaa986caab96c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.82
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77c7a91e90032b04d8faaa986caab96c, type: 3}
 --- !u!1 &839805398187822697 stripped
