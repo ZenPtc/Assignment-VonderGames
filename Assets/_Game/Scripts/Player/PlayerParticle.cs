@@ -38,17 +38,17 @@ namespace TK
 
         private void PlayJumpParticle()
         {
-            Instantiate(_jumpParticle, _jumpTransform.position, _jumpTransform.rotation);
+            Instantiate(_jumpParticle, _jumpTransform);
         }
 
         private void PlayDashParticle()
         {
-            Instantiate(_dashParticle, _dashTransform.position, _dashTransform.rotation);
+            Instantiate(_dashParticle, _dashTransform);
         }
 
         private void PlayAttackParticle()
         {
-            Instantiate(_attackParticle, _attackTransform.position, _attackTransform.rotation);
+            Instantiate(_attackParticle, _attackTransform);
         }
     }
 }
