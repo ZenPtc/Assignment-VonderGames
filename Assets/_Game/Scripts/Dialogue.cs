@@ -7,7 +7,7 @@ namespace TK
     {
         public NPC.Name name;
 
-        [TextArea(3, 10)]
+        [TextArea(3, 4)]
         public string[] sentences;
     }
 }
