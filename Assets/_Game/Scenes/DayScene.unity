@@ -234,6 +234,7 @@ Transform:
   - {fileID: 2078822926}
   - {fileID: 1226595892}
   - {fileID: 1664162388}
+  - {fileID: 1405792514}
   m_Father: {fileID: 2096997233}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1338,7 +1339,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 200924918}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 18.8}
 --- !u!212 &160000736
 SpriteRenderer:
@@ -1553,7 +1554,6 @@ Transform:
   - {fileID: 1205855395}
   - {fileID: 298248821}
   - {fileID: 300255964}
-  - {fileID: 1405792514}
   - {fileID: 160000735}
   m_Father: {fileID: 2096997233}
   m_RootOrder: 2
@@ -6647,7 +6647,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 200924918}
+    m_TransformParent: {fileID: 45069707}
     m_Modifications:
     - target: {fileID: 1382615702713990, guid: a83e49a9ef353054f985b54da0661a9d, type: 3}
       propertyPath: m_Name
@@ -6655,7 +6655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4646371929636212, guid: a83e49a9ef353054f985b54da0661a9d, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4646371929636212, guid: a83e49a9ef353054f985b54da0661a9d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6699,11 +6699,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 212834864016475396, guid: a83e49a9ef353054f985b54da0661a9d, type: 3}
       propertyPath: m_SortingLayer
-      value: -1
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 212834864016475396, guid: a83e49a9ef353054f985b54da0661a9d, type: 3}
       propertyPath: m_SortingLayerID
-      value: -326776283
+      value: -1398301503
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a83e49a9ef353054f985b54da0661a9d, type: 3}
@@ -8035,7 +8035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 99362702411866275, guid: ea9742b93c940c7438e94be553893609, type: 3}
       propertyPath: _dialogue.sentences.Array.data[0]
-      value: Hi
+      value: Hi! I'll meet you inside the cave, alright?
       objectReference: {fileID: 0}
     - target: {fileID: 99362702411866276, guid: ea9742b93c940c7438e94be553893609, type: 3}
       propertyPath: m_RootOrder
